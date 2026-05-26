@@ -20,19 +20,27 @@ public class GameMatch {
     private String winnerName;
     private boolean ranked;
     private LocalDateTime createdAt;
+    private String gameMode;
 
     protected GameMatch() {
         // JPA requires a no-argument constructor.
     }
 
-    public GameMatch(String playerOneName, String playerTwoName, int playerOneScore,
-                     int playerTwoScore, String winnerName, boolean ranked) {
+    public GameMatch(String playerOneName,
+                     String playerTwoName,
+                     int playerOneScore,
+                     int playerTwoScore,
+                     String winnerName,
+                     boolean ranked,
+                     String gameMode) {
+
         this.playerOneName = playerOneName;
         this.playerTwoName = playerTwoName;
         this.playerOneScore = playerOneScore;
         this.playerTwoScore = playerTwoScore;
         this.winnerName = winnerName;
         this.ranked = ranked;
+        this.gameMode = gameMode;
         this.createdAt = LocalDateTime.now();
     }
 
@@ -66,5 +74,9 @@ public class GameMatch {
 
     public LocalDateTime getCreatedAt() {
         return createdAt;
+    }
+
+    public String getGameMode() {
+        return gameMode;
     }
 }

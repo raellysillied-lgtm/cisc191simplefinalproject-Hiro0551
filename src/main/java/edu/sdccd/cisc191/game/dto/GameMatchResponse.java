@@ -12,6 +12,7 @@ public record GameMatchResponse(
         int playerTwoScore,
         String winnerName,
         boolean ranked,
+        String gameMode,
         LocalDateTime createdAt
 ) {
     public static GameMatchResponse from(GameMatch match) {
@@ -23,6 +24,7 @@ public record GameMatchResponse(
                 match.getPlayerTwoScore(),
                 match.getWinnerName(),
                 match.isRanked(),
+                match.getGameMode(),
                 match.getCreatedAt()
         );
     }

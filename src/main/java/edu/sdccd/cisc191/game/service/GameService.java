@@ -24,8 +24,10 @@ public class GameService {
     }
 
     public GameMatchResponse createMatch(CreateMatchRequest request) {
-        String playerOne = cleanName(request.playerOneName(), "Player One");
-        String playerTwo = cleanName(request.playerTwoName(), "Player Two");
+        String playerOne = cleanName(request.playerOneName());
+        String playerTwo = cleanName(request.playerTwoName());
+
+        String gameMode = cleanGameMode(request.gameMode());
 
         int playerOneScore = random.nextInt(101);
         int playerTwoScore = random.nextInt(101);
@@ -42,7 +44,8 @@ public class GameService {
                 playerOneScore,
                 playerTwoScore,
                 winner,
-                request.ranked()
+                request.ranked(),
+                gameMode
         ));
 
         return GameMatchResponse.from(saved);
@@ -76,10 +79,30 @@ public class GameService {
                 .toList();
     }
 
-    private String cleanName(String name, String defaultName) {
+    private String cleanName(String name) {
         if (name == null || name.isBlank()) {
-            return defaultName;
+            throw new IllegalArgumentException("Player names cannot be blank.");
         }
+
         return name.trim();
+    }
+
+    private String cleanGameMode(String gameMode) {
+        if (gameMode == null || gameMode.isBlank()) {
+            return "DUEL";
+        }
+
+        String mode = gameMode.trim().toUpperCase();
+
+        if (!mode.equals("DUEL") &&
+                !mode.equals("ARENA") &&
+                !mode.equals("TOURNAMENT")) {
+
+            throw new IllegalArgumentException(
+                    "Game mode must be DUEL, ARENA or TOURNAMENT."
+            );
+        }
+
+        return mode;
     }
 }

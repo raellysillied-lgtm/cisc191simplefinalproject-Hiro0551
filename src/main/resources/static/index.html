@@ -31,6 +31,13 @@
         <input id="ranked" type="checkbox" checked>
         Ranked match
     </label>
+    <label>Game Mode
+        <select id="gameMode">
+            <option value="DUEL">DUEL</option>
+            <option value="ARENA">ARENA</option>
+            <option value="TOURNAMENT">TOURNAMENT</option>
+        </select>
+    </label>
     <button onclick="createMatch()">Play Match</button>
 </section>
 
@@ -40,7 +47,7 @@
     <table>
         <thead>
         <tr>
-            <th>ID</th><th>Player One</th><th>Player Two</th><th>Score</th><th>Winner</th><th>Ranked?</th>
+            <th>ID</th><th>Player One</th><th>Player Two</th><th>Score</th><th>Winner</th><th>Ranked?</th><th>Mode</th>
         </tr>
         </thead>
         <tbody id="matches"></tbody>
@@ -64,7 +71,8 @@
             body: JSON.stringify({
                 playerOneName: document.querySelector('#playerOneName').value,
                 playerTwoName: document.querySelector('#playerTwoName').value,
-                ranked: document.querySelector('#ranked').checked
+                ranked: document.querySelector('#ranked').checked,
+                gameMode: document.querySelector('#gameMode').value
             })
         });
 
@@ -88,6 +96,7 @@
                 <td>${match.playerOneScore} - ${match.playerTwoScore}</td>
                 <td class="winner">${match.winnerName}</td>
                 <td>${match.ranked ? 'Yes' : 'No'}</td>
+                <td>${match.gameMode}</td>
             </tr>
         `).join('');
     }

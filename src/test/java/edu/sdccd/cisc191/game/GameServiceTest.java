@@ -21,7 +21,7 @@ class GameServiceTest {
 
     @Test
     void createMatchSavesWinnerAndScores() {
-        GameMatchResponse match = service.createMatch(new CreateMatchRequest("Ada", "Grace", true));
+        GameMatchResponse match = service.createMatch(new CreateMatchRequest("Ada", "Grace", true, "DUEL"));
 
         assertThat(match.id()).isNotNull();
         assertThat(match.playerOneName()).isEqualTo("Ada");
@@ -32,7 +32,7 @@ class GameServiceTest {
 
     @Test
     void listMatchesReturnsSavedMatches() {
-        service.createMatch(new CreateMatchRequest("Linus", "Margaret", false));
+        service.createMatch(new CreateMatchRequest("Linus", "Margaret", false,  "DUEL"));
 
         assertThat(service.listMatches())
                 .extracting(GameMatchResponse::playerOneName)
