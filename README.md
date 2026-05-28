@@ -114,3 +114,5 @@ Included tests:
 | `GameServiceTest` | Service-layer game logic and persistence behavior |
 | `GameControllerTest` | REST endpoint responses |
 | `WebInterfaceTest` | The browser page loads and points to the REST API |
+
+hi
